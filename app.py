@@ -54,14 +54,14 @@ async def register_user(user: models.UserIn):
 @app.post("/trainings", response_model=TrainingDb)
 async def create_training(
     training_in: TrainingIn,
-    current_user: UserDb = Depends(get_current_user),  # Ensure this line is present
+    current_user: UserDb = Depends(get_current_user),
 ):
     created_training = await database.save_training(training_in)
     return created_training
 
 
 @app.get("/trainings", response_model=List[TrainingDb])
-async def list_trainings(current_user: UserDb = Depends(get_current_user)):  # Use the custom dependency here
+async def list_trainings(current_user: UserDb = Depends(get_current_user)):
     trainings = await database.list_trainings()
     return trainings
 
